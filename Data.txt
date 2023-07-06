@@ -1,0 +1,748 @@
+##Java
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#Java 5
+1. Generics 
+2. Enhanced for Loop 
+3. Autoboxing/Unboxing 
+4. Typesafe Enums 
+5. Varargs 
+6. Static Import 
+7. Metadata (Annotations) 
+8. Instrumentation
+
+
+#Java 6
+1. Scripting Language Support 
+2. JDBC 4.0 API 
+3. Java Compiler API 
+4. Pluggable Annotations 
+5. Native PKI, Java GSS, Kerberos and LDAP support
+6. Integrated Web Services
+7. Lot more enhancements
+
+#Java 7
+1. Now String can be used to control Switch statement
+2. Multi Catch Exception
+3. Try-with-resource statement
+4. Binary Integer Literals
+5. Underscore in numeric literals, etc
+
+
+#Java 8
+1. Lambda Expressions
+2. Streams
+3. Default & Static Methods
+4. Date and Time API
+5. Type Annotations
+6. Nashorn JavaScript Engine
+7. Concurrent Accumulators
+8. Parallel operations
+9. PermGen Space Removed
+10. TLS SNI
+11. Functional Interfaces: Consumer, producer, predicate, Function
+
+#Lambda Expressions
+* To Enable functional programming and to bring benefits of functional Programming
+* Mainly this concept came for to remove boiler code
+* By this we can give the implemention in easy manner.
+* It is anonymous means nameless-no return type,no modifiers
+      ->If statement is single line then no need { and }
+      ->If single argument is there then no need () or () optional.
+      ->Multiple parameters are enclosed in mandatory parentheses and separated by commas
+      ->Compiler can guess the typeod arguments automatically so no need to declare explicity
+      ->If you use "return type". you should use ""
+      ->In curly braces only we should declare return otherwise should not declare return statement.
+* It allows only java.lang.Object abstract methods like toString
+* Compiler can understand arguments types,no need to declare explicity.
+* No need to declare explicity.
+* There is no performance issue because compiler only copiles only once.
+* A lambda expression can have zero, one or more parameters
+
+Example:
+@FunctionalInterface
+interface Aggregation {
+
+    abstract int add(int a,int b);
+    
+    default int multiply(int a,int b)
+    {
+        return a*b;
+    }
+    static int subtraction(int a,int b)
+    {
+        return a*b;
+    }
+}
+
+class FunctionalLambda{
+
+    public static void main(String[] args) {
+        
+        //Addition addition=(int a,int b)->{return a+b;};
+        //Addition addition=(a,b)->{return a+b;};
+        Aggregation aggregation=(a,b)->a+b;
+        int add = aggregation.add(10, 20);
+        System.out.println("addition--"+add);
+
+        //default method we can call using other implemented method's reference of interface
+        int multiply = aggregation.multiply(10, 20);
+        System.out.println("multiply--"+multiply);
+
+        //we call static methods by using Class name.
+        int subtraction = Aggregation.subtraction(10, 20);
+        System.out.println("subtraction--"+subtraction);
+    }
+}
+
+interface Test1 {
+    default int multiply(int a,int b)
+    {
+        return a*b;
+    }
+}
+interface Test2 {
+    default int multiply(int a,int b)
+    {
+        return a*b;
+    }
+}
+class TestClass  implements Test1,Test2 
+{
+    @Override
+    public int multiply(int a, int b) {
+         int test1 = Test1.super.multiply(a, b);
+         int test2 = Test2.super.multiply(a, b);
+        return test1>100?test1:test2;
+    }
+}
+
+
+
+#Solid Principles
+Single Responsibility Principle:- Each class should be responsible for a single part or functionality of the system
+Open-Closed Principle:- Software components should be open for extension, but not for modification
+Liskov Substitution Principle:- Objects of a superclass should be replaceable with objects of its subclasses without breaking the system
+Interface Segregation Principle:- No client should be forced to depend on methods that it does not use
+Dependency Inversion Principle:- High-level modules should not depend on low-level modules, both should depend on abstractions
+
+#Design Patterns
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Design Patterns
+1.Creational Pattern:- Singleton design pattern,Prototype Design Pattern, Builder Design Pattern, 
+                       Factory Method Pattern, Abstract Factory Pattern
+					   
+2.Structural Pattern:- Adapter Pattern, Bridge Pattern, Composite Pattern, Decorator Pattern, 
+                       Facade Pattern, Flyweight Pattern, proxy Pattern
+					   
+3.Behavioral Pattern:- Chain of Responsibility Pattern, Command Pattern, Interpreter Pattern, Iterator Pattern, Mediator Pattern, 
+                       Memento Pattern, Observer Pattern,State Pattern, Strategy Pattern, Template Pattern, Visitor Pattern, Null Object
+
+YAGNI principle:- ("You Aren't Gonna Need It") is a practice in software development 
+                         which states that features should only be added when required.
+				  
+Keep it super, simple (KISS):- is a design principle which states that designs and/or systems should be as simple as possible. 
+                                Wherever possible, complexity should be avoided in a system—as simplicity guarantees the greatest levels of user 
+                                 acceptance and interaction.
+							   
+Popularized by the book, The Pragmatic Programmer, the DRY principle states that, “every piece of knowledge must have a single, 
+unambiguous, authoritative representation within a system.” Using the principle, logic or algorithms that have certain 
+functionality should only appear once in an application.
+
+##Microservices
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+What is Microservices?
+   1. Microservices is a Service Oriented Architecture.
+   2. Dividing entire Applications into independent parts,each independent part is serves one service.
+   
+Advantage of Microservices?
+   1. Microservices architecture gives freedom to developers for independently develop and deploy services.
+   2. If one microservice fails, the others will continue to work.
+   3. Code for different services can be written in different languages.
+   4. Easy integration and automatic deployment using open-source continuous integration tools such as Jenkins.
+   5. Easy to undrerstand code because small small components.
+   6. Reduce downtime.
+   
+Disadvantgaes of Microservices?
+   1. There is a higher chance of failure during communication between different services.
+   2. Difficult to manage a large number of services.
+   3. he developer needs to solve the problem, such as network latency and load balancing.
+   
+Microservices vs Monolith vs Soa?
+   1. Application is too large and complex to fully understand and made changes fast and correctly.
+   2. The size of the application can slow down the start-up time.
+   3. You must redeploy the entire application on each update.
+   4. Impact of a change is usually not very well understood which leads to do extensive manual testing
+   
+#12 Factors App
+1. Codebase:- One codebase tracked in revision control, many deploys
+2. Dependencies:- Explicitly declare and isolate dependencies
+3. Config:- Store config in the environment
+4. Backing services:- Treat backing services as attached resources
+5. Build, release, run:- Strictly separate build and run stages
+6. Processes:- Execute the app as one or more stateless processes
+7. Port binding:- Export services via port binding
+8. Concurrency:- Scale out via the process model
+9. Disposability:- Maximize robustness with fast startup and graceful shutdown
+10. Dev/prod parity:- Keep development, staging, and production as similar as possible
+11. Logs:- Treat logs as event streams
+12. Admin processes:- Run admin/management tasks as one-off processes
+
+#Principles
+1. Scalability
+2. Flexibility
+3. Independent and autonomous
+4. Decentralized governance
+5. Resiliency
+6. Failure isolation.
+7. Continuous delivery through the DevOps
+8. Real-Time Load Balancing.
+9. Availability.
+10. Seamless API Integration and Continuous Monitoring.
+
+#Design Patterns
+Hystrix/ResilenceJ:
+ server acts as a fault-tolerance robust system. It is used to avoid complete failure of an application. It does this by using the Circuit Breaker mechanism. If the application is running without any issue, the circuit remains closed. If there is an error encountered in the application, the Hystrix Server opens the circuit. The Hystrix server stops the further request to calling service. It provides a highly robust system.
+
+##Spring
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#Spring
+#Spring Boot
+1.What is Spring Boot?
+    ->Spring Boot is combination of Spring Framework & Removing XML & added Integrated Services (Embeded Tomcat,H2 database,Etc)
+	
+2.Spring Boot Advantages?
+    ->Removed All XML configuration.provided Micro Services ,and integrated Services (Embeded Tomcat,H2 database, Etc), Third Party libs(No-SQL,Net Flix)
+	
+3.Spring Boot Dis-Advantages?
+    ->Existing Spring project to Spring is Not Straight Forward, Mostly for new project deployment in weblogic,websphere is not simple.Remove conflicting jars etc
+      in order to make it work in application server microservices kept mind in Cloud native.
+
+#Spring Annotations
+@EnableAutoConfiguration:- will automatically do the spring configurations. it will create, register and load the Spring configuration beans
+required by the applications from the classes available in the class path. It's setup the all required configuration
+if you want any class exclude.
+
+@EnableAutoConfiguration(exclude=(Data SourceAutoConfiguration.clas s}):-
+
+@ComponentScan(value="package"):- Spring would search the package and all its sub packages for components/beans that
+declared by @Component or @Service or @Repository.
+
+@Configuration:- allow to register extra beans in the context or import additional configuration classes
+
+@SpringBootApplication:- It is Combination of Common Annotations used by developer.lt's contains mainly three Annotions
+
+@EnableAutoConfiguration:- enable Spring Boot's auto-configuration mechanism.
+
+@ComponentScan:- enable @Component scan on the package where the application is located.
+
+@Configuration:- allow to register extra beans in the context or import additional configuration classes
+
+@Component:- When Component scan is enable in the spring,the Spring can pick up and pull in to the Applcation context for bean creation. used to auto-detect 
+             and auto-configure beans using classpath scanning. There's an implicit one-to-one mapping between the annotated class and the bean 
+			 (i.e. one bean per class).
+			-> It is class level Annotation. in xml <context:component-scan base-package="package" >
+
+@Service:- It is used in Business layer
+
+@Bean:- it is used to explicitly declare a single bean, rather than letting Spring do it automatically for us. it is method level Annotation.by default, 
+        name of the method serves as the bean name.
+
+@Controller:-
+
+@RestController:-
+
+@RequestMapping(value="/path " ,method-RequestMethod.GET, produces=,consumes=):-
+
+@PutMapping(value="/path", produces=,consumes=):-
+
+@GetMapping(value="/path", produces=,consumes=):-
+
+@PostMapping(value="/path",produces=,consumes=):-
+
+@DeleteMapping(value="/path", produces=,consumes-):-
+
+@PathVariable("FieldName") String name:-
+
+@RequestParam("FieldName") String name:-
+
+@RequestBody Student student:-
+
+@Autowired:-
+
+@Param:-
+
+@ConfigurationProperties:-
+
+@Setter:-
+
+@Getter:-
+
+@Validated:-
+
+@Data:-
+
+@Timed:-
+
+@Aspect:-
+
+@OnetoOne(cascade=CascadeType.All,mappedBy="entityClass", fetch FetchType.LAZY):-
+
+@One ToMany(cascade Cascade Type.All,mappedBy="entityClass"fetch Fetch Type.LAZY):-
+
+@Many ToOne(cascade Cascade Type.All,mappedBy="entityClass".fetch FetchType.LAZY):-
+
+@JoinColumn(name="foreignKey"):-
+
+@Primary:-
+
+@Default:-
+
+@Value(value="$ (welcome.name)"):- To bind the value from property file data to variable
+                                   here in properties file whatever we declared to welcome.name="rafi' that will assign to name.
+
+@Profile: When we create an application, we need to deploy it in different kinds of environments, such as development, QA, staging and production.
+          The application configuration in each of these environments will be different. One of the approaches to handling application configuration 
+          is to create something called a profile. Spring Boot has the concept of a profile built in we have diffrent different environments like 
+          dev, prod, test.so we have to maintain diff diff DBs schemas or beans or set up.for this we are using @profile to activate this we need configure in 
+          application.properties-->spring.profiles.active-prod or spring.profiles.active-dev
+@Profile("dev")
+@Bean
+public String hello()
+ return "hi hello dude";
+ 
+application-dev.properties
+application-qa.properties
+application-stage.properties
+application-prod.properties
+
+
+Existing XML:-
+If you want to convert existing xml configuration Spring application to Spring boot just we need to import all the Xml in to context by using
+import resource.it will assign all the depencies to respected bean.
+@lmportResource ("clas path : beans: xml")
+@SpringBootApplication
+public class SpringApp
+
+
+#Spring MVC
+
+
+
+#Spring Security
+providing security to the Application. Spring itself is providing this feature. Just declare the jar in pom.xml.by 
+
+Case 1:- Default its generate the default username and password.
+Case 2:- we can specify custom username and password in application.properties
+    
+    security.user.name-admin
+    security.user.pas sword-Password
+
+#Spring AOP
+
+#Spring JPA
+1.JpaRepositary?
+	->Provided by JPA.Simplify the implementation of data access layer using jpa.
+	
+2.CrudRepositary
+	->its provieds the methods for Crud operations. its extends super interface Repository.
+	->it is recommended,because ,it doesn't tie with application with any specific store implementation
+	
+3.PagingAndSortingRepository extends CrudRepositary
+	->It is made specialy for paging and sorting
+	->Iterable T> findAll(Sort sort)
+	->Page<T> findAll(Pagea ble pageable)
+
+#Actuator
+  it's sub project of a Spring Boot Applcation.its production ready features to help you monitor and manage Appication.
+Monitoring our app, gathering metrics, understanding traffic or the state of our database by default we can see only three endpoints
+if you add below line in application.properties,we can see all the actuators which are available.
+management.endpoints.web.exposure.include and exclude also available
+
+health: http://localhost:8080/actuator/health
+
+info: http://localhost:8080/actuator/info
+
+actuator-http://localhost:8080/actuator
+
+#HTTP Methods
+GET:- Retrieves data from the server, Should have no other effect.
+POST:- Sends data to the server for creating a new entity. Often used when uploading a file or submitting a web form.
+PUT:- Similiar to POST, but used to replace an existing entity
+PATCH:- Similar to PUT, but used to update only certain fields within an existing entity
+DELETE:- Removes data from the server.
+TRACE:- Provides a way to test what server receives. It simply returns what was sent.
+OPTIONS:- Allows a client to get information about the request methods supported by a service. The relevant response header is Allow
+		  with supported methods. Also used in CORS as preflight request to inform server about actual request method and ask about custom
+		  headers.
+HEAD:- Returns only the response headers.
+CONNECT:- Used by browser when it knows it talks to a proxy and the final URI begins with https://. The intent of CONNECT is to allow
+		  end-to-end encrypted TLS session, so the data is unreadable to a proxy
+
+#Custom Queries
+Creating Database Queries from Method Names.We can write our own methods to get the data from DB while using CrudRepository.
+Should be some Query name Conventions.this aproach basically works fine for a small number of Queries.lts tied with domain class(Pojo).
+it tied with SQL queries
+
+ex: findByLastName or findByFirstNameAnd LastName or findByFirstNameOrLastName or findByFirstNameStartingWith
+Creating database Queries With Named Queries--@NamedQuery(JPA) - OR @NamedNativeQuery->(SQL)
+lf you want to write your own Query then we can write using
+
+@NamedQueries(value={
+    @NamedQuery(name="Student.findByName", query"SELECT id FROM Student s WHERE s.name=?1 ")
+    @NamedQuery(name="Student.findByldAnd Name",query-"SELECT name,id FROM Student s WHERE s.id ?1 OR s.name ?2")}
+    
+@NamedNativeQueries(value={
+    @NamedNativeQuery(name"Student.findByName", query-"SELECT FROM Student WHERE name ?1",resultClass-Student.class)
+    @NamedNativeQuery(name "Student.findByldAndName".querv "SELECT FROM Student s WHERE s.ide105 & name=71".resultClass Student.class)}
+    
+Creating database Queries With @Query Annotation.If you want to write your own Query then we can write using.this we can define on top of method in interface (CrudRepositary).it doesnot tie with Domain class
+
+@Query(value-"SELECT s FROM Students WHERE s.id=?1 OR s.name =?2")
+
+if you want to use native queries-use like
+@Query(value="SELECT s FROM Student s WHERE s.id=?1 OR s.name-?2",nativeQuery-true)
+
+#Thymeleaf
+Server side template engine that can process xml,HTML etc,it can access fields & messages & properties 
+from i18n messagaes files.we can bind out class fields with html form elements using Themeleaf.we can iterate our java collections usina Thymeleaf
+we can bind out class fields with html form elements using Themeleaf.
+we can iterate our java collections using Thymeleaf.
+we can perform form validation and display i18n messages.
+we can also use css files with our thymeleaf.
+its configuration defined n application.properties
+spring.thymeleaf.mode:HTML5
+spring.thymeleaf.prefix: default value is classpath:/Memplates/
+spring.thymeleaf.suffix: type of file like jsp ot html
+we should mention below line in jsp or html
+<html xmIns"http://www.w3.org/1999/xhtmr xmins:th="http://www.thymeleaf.org">
+(path of the html or jsp's)
+
+#Loggers
+     Loggers mainly used to monitor the application at runtime and for analysis the application and its health.
+OFF:- Does not print any loggers
+FATAL:- It is civier errors,leads programmes to stop, Crashed the Applications
+ERROR:- Exception or Errors
+WARN:- database connections,connections loss.just like warning messages,missing configuration setting
+INFO:- typically used to output information that is useful to the running and management of your systeminformatic,server started ,where went
+DEBUG:- used it only for development and testing.lt displays all loggers to easy development
+TRACE(recently intoduces in 1.2):- more detailed information. Expect these to be written to logs only.used it only for development and testing
+ALL:- turn on all loggings
+
+-> It tells which logger needs execute and Root of the Logger
+log4j.rootLogger TRACE, X
+-> stdout means its name of the logger it is user defined.and place it in root logger then it will excute
+-> ConsoleAppender it is type of appender where this logger needs to display.it displays the at console.like System.out.printin
+log4j.appender.X-org.apache.log4j.ConsoleAppender
+log4j.appender.X.layout-org.apache.log4j.PatternLayout
+log4j.appender.X.layout.ConversionPattern= % d [%24F: % : % L ] -%m %n
+-> myLogger means its name of the logger it is user defined,and place it in root logger then it will excute
+-> FileAppender it is type of appender where this logger needs to display it tells it is a file logger.stores in file
+log4j.appender.Y-org.apache.log4j FileAppender
+-> it is path of the logger file and extension of the file
+log4j.appender.Y.File=c:/sonu/myLogger1.log
+-> It tell that size of the Log file.
+log4j.appender.Y.File. MaxFile Size=10MB
+-> f file is croosed the limit then takes the backup
+log4j.appender.Y.File. MaxBackuplndex-10
+-> it is used to in which format logs needs to store in file.PatternLayout is one type of lay out format
+log4j.appender.Y. layout=org.apache.log4j.PatternLayout
+-> it tells the format of the logs
+log4j.appender.Y.layout.ConversionPattern=%d [%10F : % t : % L ] -%m %n
+-> this category tells that which root logger needs to execute ,and how to load the file.
+log4i.cateaory 2=debug.Y
+DELL
+PDBY2
+-> this category tells that which root logger needs to execute ,and how to load the file.
+log4j.category.Z=debug,Y
+-> ft tells the Other Loggers to stop,.. true-execute,..false=stop--if you put it as true the Above X will execute,if you put it as false
+above X will not execute.
+log4j.additivity.Z=false
+-> Here we can maintain same name like Y==Z,No issue.
+-> But we need load logger like public static final Logger log-Logger.getLogger("Z");
+
+##Http Methods & Status Codes
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+400 - BAD REQUEST
+401 - UNAUTHORIZED
+403 - UNAUTHECATION
+404 - RESOURCE NOT FOUND
+415 - UNSUPPORTED TYPE - Representation not supported for the resource
+500 - SERVER ERROR
+Let’s consider a few HTTP Methods:
+GET : Should not update anything. Should be idempotent (same result in multiple calls). Possible Return Codes 200 (OK) + 404 (NOT FOUND) +400 (BAD REQUEST)
+POST : Should create new resource. Ideally return JSON with link to newly created resource. Same return codes as get possible. In addition - Return code 201 (CREATED) can be used.
+PUT : Update a known resource. ex: update client details. Possible Return Codes : 200(OK) + 404 (NOT FOUND) +400 (BAD REQUEST)
+DELETE : Used to delete a resource. Possible Return Codes : 200(OK).
+
+##Git
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+git config --global user.email "rafi.gdk@gmail.com"
+git config --global user.name "rafi-gdk".
+
+New
+----------------
+git init
+git add README.md
+git commit -m "optimized"
+git branch -M master
+git remote add origin https://github.com/rafi-gdk/spring-boot-redis-cache.git
+git push -u origin master
+
+Existing
+----------------
+git remote add origin https://github.com/rafi-gdk/spring-boot-apache-spark.git
+git branch -M master
+git push -u origin master
+
+Revoke
+---------------
+git init
+git remote add origin https://github.com/rafi-gdk/spring-boot-microservices.git
+git reset --merge commitId
+git reset --hard HEAD~16
+git push --force origin master
+
+git fetch
+git branch master
+
+
+##SQL
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+DDL(Data Defination Language):- This language is used to manage database objects. It is collection of five commands.
+CREATE, ALTER, DROP, TRUNCATE, RENAME
+
+DML(Data Maniplation Language):- This language is used to manipulate the data you have stored. It is collection
+of four commands. INSERT, UPDATE, DELETE, MERGE
+
+DRL(Data Retrival Language):- This language is used to retrieve the data from the database. It is collection of
+only one command. SELECT
+
+TCL(Transaction Control Language):- It is used to maintain the transaction of Oracle database. It is collection
+of three commands. COMMIT, ROLLBACK, SAVEPOINT
+
+DCL(Data Control Language):- This language is used to control the axis of the data to the users it is collection
+of two commands. GRANT, REVOKE
+
+Order By clause:- Order By clause is used to arrange the rows in the table.
+By default order by clause ascending order.
+Null values are arranged in the last.
+Ex: Select * from emp Order By sal;
+Select * from emp Order By ename;
+Select * from emp Order By HIREDATE; 
+
+Group By clause:- 
+Group By clause is used to divided rows into several group. So that
+we can apply group function on each group.
+Ex: Select deptno, sum(sal) from emp Group By deptno;
+Select deptno,min(sal),max(sal) from emp Group By deptno;
+
+Rule of group by clause: All the column in the select of list should use group
+functions or should by included in group by clause.
+
+Having clause:- (to use Group By clause)
+Having clause is used to filter the output from Group By clause.
+Ex: Select deptno, sum(sal) from emp Group By deptno having sum(sal) > 9000
+
+DROP table employee ;
+DROP table department;
+
+CREATE TABLE department
+(
+   DEPT_ID int,
+   DEPT_NAME varchar(10),
+   PRIMARY KEY (DEPT_ID)
+);
+
+CREATE TABLE employee 
+(
+  EMP_ID int,
+  EMP_NAME varchar(20),
+  EMP_SALARY decimal(10,2),
+  DEPT_ID int,
+  PRIMARY KEY (EMP_ID),
+  FOREIGN KEY (DEPT_ID) REFERENCES department(DEPT_ID)
+);
+
+SELECT  * FROM employee ;
+SELECT * FROM department;
+
+TRUNCATE TABLE employee;.
+TRUNCATE TABLE department;
+
+INSERT INTO department VALUES(1,'A');
+INSERT INTO department VALUES(2,'B');
+INSERT INTO department VALUES(3,'C');
+INSERT INTO department VALUES(4,'D');
+INSERT INTO department VALUES(5,'E');
+
+INSERT INTO employee VALUES(1,'a',1500.22,5);
+INSERT INTO employee VALUES(2,'b',700.55,5);
+INSERT INTO employee VALUES(3,'c',700.55,5);
+INSERT INTO employee VALUES(4,'d',10.01,8);
+INSERT INTO employee VALUES(5,'e',10.01,8);
+
+-----count of dept_id in descending order
+
+SELECT dept_id, count(dept_id) FROM employee GROUP BY dept_id ORDER BY count(dept_id) desc;
+
+-----salary in descending order
+
+SELECT DISTINCT emp_salary FROM employee ORDER BY emp_salary desc;
+
+-----max salary
+
+SELECT MAX(e.emp_salary) FROM employee e;
+
+SELECT e1.emp_name, e1.emp_salary FROM employee e1 WHERE 1-1= 
+               (SELECT count(DISTINCT e2.emp_salary) FROM employee e2 WHERE e2.emp_salary> e1.emp_salary);
+
+SELECT * FROM (SELECT emp_name,emp_salary,DENSE_RANK() OVER 
+               (ORDER BY emp_salary DESC) AS emp_salary_rank FROM employee) AS TEMP WHERE emp_salary_rank=5;
+
+Postgres:-
+SELECT e.emp_id , e.emp_salary FROM employee e WHERE e.emp_salary IN (
+  SELECT emp_salary FROM employee ORDER BY emp_salary DESC LIMIT 1 OFFSET 3);
+
+Mysql:-
+SELECT e.emp_id , e.emp_salary FROM employee e WHERE e.emp_salary IN (
+  SELECT emp_salary FROM employee ORDER BY emp_salary DESC LIMIT 1,2);
+
+SELECT d.dept_name,e.dept_id,e.emp_name,e.emp_salary FROM employee e INNER JOIN department d 
+        ON e.dept_id=d.dept_id WHERE (e.dept_id,e.emp_salary) IN 
+            (SELECT e.dept_id , MAX(e.emp_salary) FROM employee e GROUP BY e.dept_id);
+
+SELECT e.dept_id ,e.emp_name, e.emp_salary FROM employee e WHERE (e.dept_id,e.emp_salary) IN 
+    (SELECT e.dept_id , MAX(e.emp_salary) FROM employee e GROUP BY e.dept_id);
+
+-----Create view
+
+CREATE VIEW salary_order AS (SELECT * FROM employee ORDER BY emp_salary DESC); 
+
+SELECT * FROM salary_order;
+
+DROP VIEW salary_order;
+
+-----Create Index
+
+CREATE INDEX employee_search ON employee(emp_id,dept_id);
+
+SELECT * FROM employee WHERE emp_id<25;
+
+DROP INDEX employee_search;
+
+------------------Create Stored Procedures-----------------------------------------------
+
+DROP TABLE IF EXISTS student;
+CREATE TABLE student(
+STUDENT_ID int PRIMARY KEY,
+ENGLISH int,
+HINDI int,
+MATHEMATICS int,
+PHYSICS int,
+CHEMISTRY int,
+TOTAL int,
+AVERAGE INT,
+GRADE char(1)
+);
+
+-----Create Triggers
+
+CREATE OR REPLACE FUNCTION UPDATE_STUDENT() RETURNS TRIGGER AS $UPDATE_STUDENT$
+BEGIN 
+   
+   NEW.TOTAL = NEW.ENGLISH + NEW.HINDI + NEW.MATHEMATICS + NEW.PHYSICS + NEW.CHEMISTRY;
+   NEW.AVERAGE = NEW.TOTAL/5;
+   
+   IF NEW.AVERAGE >=90 THEN
+       NEW.GRADE = 'A';
+   ELSEIF NEW.AVERAGE >=75 AND NEW.AVERAGE<90 THEN
+       NEW.GRADE = 'B';
+   ELSEIF NEW.AVERAGE >=60 AND NEW.AVERAGE<75 THEN
+       NEW.GRADE = 'C';
+   ELSEIF NEW.AVERAGE >=40 AND NEW.AVERAGE<60 THEN
+       NEW.GRADE = 'D';
+   ELSE 
+       NEW.GRADE = 'F';
+   END IF;
+  
+   RETURN NEW;
+END;
+$UPDATE_STUDENT$ LANGUAGE 'plpgsql';
+
+
+CREATE TRIGGER UPDATE_STUDENT 
+    BEFORE INSERT OR UPDATE ON student
+    FOR EACH ROW 
+    EXECUTE FUNCTION UPDATE_STUDENT();
+   
+INSERT INTO student values(1,80,50,60,80,60,NULL,NULL,NULL);
+INSERT INTO student values(2,100,100,100,100,100,NULL,NULL,NULL);
+INSERT INTO student values(3,90,90,80,80,80,NULL,NULL,NULL);
+INSERT INTO student values(4,80,80,60,80,69,NULL,NULL,NULL);
+INSERT INTO student values(5,30,38,35,36,37,NULL,NULL,NULL);
+INSERT INTO student values(6,40,45,50,55,60,NULL,NULL,NULL);
+
+SELECT * FROM student;
+
+-----Create Procedure
+
+CREATE OR REPLACE PROCEDURE  UPDATE_STUDENT(id int, maths int) AS $UPDATE_STUDENT$
+BEGIN 
+UPDATE student SET MATHEMATICS = maths WHERE STUDENT_ID=id;
+END;
+$UPDATE_STUDENT$ LANGUAGE 'plpgsql';
+
+call UPDATE_STUDENT(1,99);
+
+SELECT * FROM student;
+
+-----Create Function
+
+CREATE OR REPLACE FUNCTION COUNT_STUDENT() RETURNS int AS $COUNT_STUDENT$
+DECLARE 
+total int;
+BEGIN 
+  SELECT count(*) INTO total
+  FROM student;
+  
+   RETURN total;
+END;
+$COUNT_STUDENT$ LANGUAGE 'plpgsql';
+
+select  COUNT_STUDENT();
+------Create Cursor
+
+BEGIN;
+DECLARE STUDENT_CURSOR CURSOR
+FOR SELECT * FROM student ;
+
+FETCH 8 FROM STUDENT_CURSOR;
+
+-----------------------Joins----------------------------
+
+SELECT e.emp_id, d.dept_name FROM employee e INNER JOIN department d ON (e.dept_id=d.dept_id);
+SELECT e.emp_id, d.dept_name FROM employee e LEFT OUTER JOIN department d ON (e.dept_id=d.dept_id) ;
+SELECT e.emp_id, d.dept_name FROM employee e RIGHT OUTER JOIN department d ON (e.dept_id=d.dept_id) ;
+SELECT e.emp_id, d.dept_name FROM employee e INNER FULL OUTER department d ON (e.dept_id=d.dept_id) ;
+
+Some Other Queries:
+
+SELECT dept_id,count(emp_id) AS Employees FROM employee GROUP BY dept_id;
+
+SELECT e.dept_id,dept_name,count(e.emp_id) AS Employees FROM employee e INNER JOIN department d 
+               ON  e.dept_id=d.dept_id 
+			   GROUP BY e.dept_id,dept_name 
+			   ORDER BY e.dept_id;
+
+SELECT dept_id,count(e.emp_id) AS Employees FROM employee e GROUP BY e.dept_id HAVING count(e.emp_id)>2 ORDER BY dept_id ;
+
+SELECT emp_salary FROM employee ORDER BY emp_salary desc ;
+
+SELECT DISTINCT emp_salary AS SALARY FROM employee WHERE emp_salary BETWEEN 30000 AND 40000 ORDER BY emp_salary DESC ;
+
+SELECT emp_name,max(emp_salary) FROM employee WHERE emp_salary < (SELECT max(emp_salary) FROM employee);
+
+SELECT emp_name,emp_salary FROM employee WHERE emp_salary =
+  (SELECT DISTINCT emp_salary FROM employee ORDER BY emp_salary DESC LIMIT 1 OFFSET 4);

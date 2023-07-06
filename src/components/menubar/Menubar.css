@@ -1,0 +1,23 @@
+.menubarstyle{
+	display:inline-block;
+	list-style: none;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.menubarstyle li{
+list-style: none;
+list-style-type: none;
+margin: 0;
+padding: 0;
+display:inline-block;
+margin:auto;
+}
+
+.menubarstyle li a{
+text-decoration: none;
+color:rgb(250, 250, 250);
+font-size: 18px;
+padding:8px 20px;
+}

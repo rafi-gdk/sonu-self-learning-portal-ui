@@ -1,0 +1,15 @@
+.display-content {
+    top: 13vh;
+    left: 40vh;
+    width: 166vh;
+    height: 85vh;
+    overflow: auto;
+    color: #0a4145;
+    font-weight: bold;
+    justify-content: left;
+    align-items: flex-start;
+    display: flex;
+    position: fixed;
+    list-style-type: none;
+    list-style: none;
+}
