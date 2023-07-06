@@ -6,8 +6,9 @@ const DataInsertForm = () => {
     const [topic, setTopic] = useState('');
     const [subTopic, setSubTopic] = useState('');
     const [content, setContent] = useState('');
-    const [image, setImage] = useState('');
+    const [image, setImage] = useState(null);
     const [response, setResponse] = useState('');
+
     var textArea = content;
 
     const handleTopicChange = (e) => {
@@ -47,13 +48,25 @@ const DataInsertForm = () => {
 
     const HandleSubmit = (e) => {
 
-        addPrefix();
+        if (topic == null) {
+            alert("Topic should be not Empty...");
+        }
+        if (subTopic == null) {
+            alert("Subtopic should be not Empty...");
+        }
+        if (textArea == null) {
+            alert("Conent should be not Empty...");
+        }
 
+        addPrefix();
         const formData = new FormData();
         formData.append('topicName', topic);
         formData.append('subTopicName', subTopic);
         formData.append('content', textArea);
-        formData.append('image', image);
+
+        if (image != null) {
+            formData.append('image', image);
+        }
 
         const requestOptions = {
             method: 'POST',
@@ -64,7 +77,7 @@ const DataInsertForm = () => {
         fetch('http://localhost:1001/tutorial-service/add-topic-ui', requestOptions)
             .then((res) => {
                 setResponse(res)
-            })
+            });
 
         if (response != null) {
             alert("Data Insertion Success!");
@@ -74,17 +87,19 @@ const DataInsertForm = () => {
     };
 
     return (
+
         <div className="insert-form">
-            <form onSubmit={(e) => { HandleSubmit(e) }}>
+
+            <form>
                 <label > Topic : </label><br />
                 <input type="text" id="topic" value={topic} required onChange={(e) => { handleTopicChange(e) }} /><br />
                 <label > Sub-Topic : </label><br />
                 <input type="text" id="subTopic" value={subTopic} required onChange={(e) => { handleSubTopicChange(e) }} /><br />
-                <label > Image : </label><br />
-                <input type="file" id="file" required onChange={(e) => { handleImageChange(e) }} /><br />
+                <label > Image : </label><br /><br />
+                <input type="file" id="file" required onChange={(e) => { handleImageChange(e) }} /><br /><br />
                 <label > Content : </label><br />
                 <textarea id="content" name="content" placeholder="Write something.." value={content} required onChange={(e) => { handleContentChange(e) }} />
-                <input type="submit" value="Submit" />
+                <button onClick={HandleSubmit}>Submit</button>
             </form>
         </div>
     );

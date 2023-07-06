@@ -1,4 +1,4 @@
-##Java
+#Java
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #Java 5
 1. Generics 
@@ -9,7 +9,6 @@
 6. Static Import 
 7. Metadata (Annotations) 
 8. Instrumentation
-
 
 #Java 6
 1. Scripting Language Support 
@@ -27,7 +26,6 @@
 4. Binary Integer Literals
 5. Underscore in numeric literals, etc
 
-
 #Java 8
 1. Lambda Expressions
 2. Streams
@@ -39,7 +37,7 @@
 8. Parallel operations
 9. PermGen Space Removed
 10. TLS SNI
-11. Functional Interfaces: Consumer, producer, predicate, Function
+11. Functional Interfaces: Consumer, Producer, Predicate, Function
 
 #Lambda Expressions
 * To Enable functional programming and to bring benefits of functional Programming
@@ -116,8 +114,6 @@ class TestClass  implements Test1,Test2
     }
 }
 
-
-
 #Solid Principles
 Single Responsibility Principle:- Each class should be responsible for a single part or functionality of the system
 Open-Closed Principle:- Software components should be open for extension, but not for modification
@@ -148,7 +144,7 @@ Popularized by the book, The Pragmatic Programmer, the DRY principle states that
 unambiguous, authoritative representation within a system.” Using the principle, logic or algorithms that have certain 
 functionality should only appear once in an application.
 
-##Microservices
+#Microservices
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 What is Microservices?
@@ -204,7 +200,7 @@ Microservices vs Monolith vs Soa?
 Hystrix/ResilenceJ:
  server acts as a fault-tolerance robust system. It is used to avoid complete failure of an application. It does this by using the Circuit Breaker mechanism. If the application is running without any issue, the circuit remains closed. If there is an error encountered in the application, the Hystrix Server opens the circuit. The Hystrix server stops the further request to calling service. It provides a highly robust system.
 
-##Spring
+#Spring
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #Spring
 #Spring Boot
@@ -316,7 +312,6 @@ application-qa.properties
 application-stage.properties
 application-prod.properties
 
-
 Existing XML:-
 If you want to convert existing xml configuration Spring application to Spring boot just we need to import all the Xml in to context by using
 import resource.it will assign all the depencies to respected bean.
@@ -326,8 +321,6 @@ public class SpringApp
 
 
 #Spring MVC
-
-
 
 #Spring Security
 providing security to the Application. Spring itself is providing this feature. Just declare the jar in pom.xml.by 
@@ -461,7 +454,7 @@ log4j.additivity.Z=false
 -> Here we can maintain same name like Y==Z,No issue.
 -> But we need load logger like public static final Logger log-Logger.getLogger("Z");
 
-##Http Methods & Status Codes
+#Http Methods & Status Codes
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 400 - BAD REQUEST
 401 - UNAUTHORIZED
@@ -475,7 +468,7 @@ POST : Should create new resource. Ideally return JSON with link to newly create
 PUT : Update a known resource. ex: update client details. Possible Return Codes : 200(OK) + 404 (NOT FOUND) +400 (BAD REQUEST)
 DELETE : Used to delete a resource. Possible Return Codes : 200(OK).
 
-##Git
+#Git
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 git config --global user.email "rafi.gdk@gmail.com"
 git config --global user.name "rafi-gdk".
@@ -507,7 +500,7 @@ git fetch
 git branch master
 
 
-##SQL
+#SQL
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 DDL(Data Defination Language):- This language is used to manage database objects. It is collection of five commands.

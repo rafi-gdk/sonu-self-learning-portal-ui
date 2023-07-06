@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment # Kubernetes resource kind we are creating
+metadata:
+  name: sonu-self-learning-portal-ui-deployment
+  labels:
+    app: sonu-self-learning-portal-ui-label
+spec:
+  replicas: 1 # Number of replicas that will be created for this deployment
+  selector:
+    matchLabels:
+      app: sonu-self-learning-portal-ui-label
+  template:
+    metadata:
+      labels:
+        app: sonu-self-learning-portal-ui-label
+    spec:
+      containers:
+        - name: sonu-self-learning-portal-ui
+          image: sonu-self-learning-portal-ui:latest # Image that will be used to containers in the cluster
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000 # The port that the container is running on in the cluster
+---
+apiVersion: v1
+kind: Service # Kubernetes resource kind we are creating
+metadata:
+  name: sonu-self-learning-portal-ui-deployment
+spec:
+  selector:
+    app: sonu-self-learning-portal-ui-label
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000

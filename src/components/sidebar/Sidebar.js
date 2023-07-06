@@ -7,9 +7,9 @@ const Sidebar = () => {
 
     const { topicId } = useParams();
     const [subTopics, setSubTopics] = useState([]);
-    const baseURL = "http://localhost:1001/tutorial-service/topics/" + topicId;
     useEffect(() => {
         const getSubTopics = async () => {
+            const baseURL = "http://localhost:1001/tutorial-service/topics/" + topicId;
             const reqData = await fetch(baseURL);
             const resData = await reqData.json();
             setSubTopics(resData);
